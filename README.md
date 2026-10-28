@@ -6,7 +6,20 @@ C# / .NET 8 (WPF + a WinForms capture overlay), no third-party packages. It idle
 
 ![Editor](docs/editor_window.png)
 
-## Run
+## Download and install
+
+Get the latest version from the [Releases page](https://github.com/NishantKhatri1983/SnapTool/releases/latest):
+
+- **SnapTool-Setup-x.y.z.exe**: normal installer. No admin rights needed; adds a Start menu entry, an uninstaller and (optionally) start with Windows.
+- **SnapTool.exe**: portable, just run it.
+
+> **Requires the Microsoft .NET 8 Desktop Runtime (x64)**, installed separately:
+> [download it from Microsoft](https://dotnet.microsoft.com/download/dotnet/8.0) (choose *.NET Desktop Runtime* → Windows *x64*).
+> A newer .NET Desktop Runtime (9, 10, …) works too. The installer checks for it and offers the link if it's missing.
+
+The files aren't code-signed, so Windows SmartScreen may say *Windows protected your PC* the first time. Click *More info* → *Run anyway*.
+
+## Build from source
 
 Needs Windows 10/11 and the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
 
@@ -14,6 +27,8 @@ Needs Windows 10/11 and the [.NET 8 SDK](https://dotnet.microsoft.com/download/d
 dotnet build -c Release
 bin\Release\net8.0-windows\SnapTool.exe
 ```
+
+`installer\build.ps1` builds the release files (portable exe and installer); the installer step needs [Inno Setup 6](https://jrsoftware.org/isdl.php).
 
 SnapTool sits in the notification area. Left-click the icon to capture, right-click it for the menu.
 

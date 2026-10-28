@@ -10,7 +10,12 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>SnapTool</RootNamespace>
     <AssemblyName>SnapTool</AssemblyName>
-    <Version>0.1.0</Version>
+    <Version>1.0.0</Version>
+    <Product>SnapTool</Product>
+    <Description>Lightweight screenshot and scrolling-capture tool</Description>
+    <Copyright>Copyright (c) 2026 NishantKhatri1983</Copyright>
+    <!-- Runs on .NET 8, or on a newer .NET (9, 10, ...) when 8 isn't installed. -->
+    <RollForward>Major</RollForward>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>snaptool.ico</ApplicationIcon>
     <!-- DPI awareness is declared in app.manifest (PerMonitorV2) so the WPF and WinForms parts agree. -->
