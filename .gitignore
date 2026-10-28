@@ -1,0 +1,13 @@
+# Build output
+bin/
+obj/
+
+# IDE / user files
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Local captures and logs
+*.log
+!docs/selftest.log

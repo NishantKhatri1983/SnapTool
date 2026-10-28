@@ -1,0 +1,103 @@
+<Window x:Class="SnapTool.Editor.EditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SnapTool.Editor"
+        Title="SnapTool" Width="1100" Height="760" MinWidth="720" MinHeight="420"
+        UseLayoutRounding="True" Background="#FFF3F3F3"
+        FontFamily="Segoe UI" FontSize="12" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="BarButtonTemplate" TargetType="ButtonBase">
+            <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Bd" Property="Background" Value="#FFE6E6E6"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Bd" Property="Background" Value="#FFD6D6D6"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.35"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ToolButtonTemplate" TargetType="RadioButton">
+            <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="1" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Bd" Property="Background" Value="#FFE6E6E6"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="Bd" Property="Background" Value="#FFD3E6FA"/>
+                    <Setter TargetName="Bd" Property="BorderBrush" Value="#FF1E88E5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="BarButton" TargetType="Button">
+            <Setter Property="Template" Value="{StaticResource BarButtonTemplate}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF262626"/>
+            <Setter Property="Padding" Value="4,3"/>
+            <Setter Property="Margin" Value="1,0"/>
+            <Setter Property="MinWidth" Value="42"/>
+            <Setter Property="Focusable" Value="False"/>
+        </Style>
+
+        <Style x:Key="ToolButton" TargetType="RadioButton">
+            <Setter Property="Template" Value="{StaticResource ToolButtonTemplate}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FF262626"/>
+            <Setter Property="Padding" Value="4,3"/>
+            <Setter Property="Margin" Value="1,0"/>
+            <Setter Property="MinWidth" Value="46"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="GroupName" Value="Tools"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="4,0,10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="64"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="PropLabel">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FF505050"/>
+            <Setter Property="Margin" Value="0,0,2,0"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="#FFFBFBFB" BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1">
+            <WrapPanel x:Name="MainBar" Margin="6,4"/>
+        </Border>
+        <Border DockPanel.Dock="Top" Background="#FFF3F3F3" BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" MinHeight="42">
+            <WrapPanel x:Name="PropBar" Margin="10,5" VerticalAlignment="Center"/>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Background="#FFFBFBFB" BorderBrush="#FFDDDDDD" BorderThickness="0,1,0,0">
+            <DockPanel Margin="10,3">
+                <ToggleButton x:Name="RecentToggle" DockPanel.Dock="Right" Content="Recent captures" Focusable="False"
+                              Padding="8,0" Margin="14,0,0,0" FontSize="11" ToolTip="Show or hide the recent captures timeline (PageUp / PageDown step through it)"/>
+                <TextBlock x:Name="StatusRight" DockPanel.Dock="Right" Foreground="#FF555555"/>
+                <TextBlock x:Name="StatusLeft" Foreground="#FF555555" TextTrimming="CharacterEllipsis" Margin="0,0,16,0"/>
+            </DockPanel>
+        </Border>
+        <ContentControl x:Name="RecentHost" DockPanel.Dock="Bottom" Focusable="False"/>
+        <ScrollViewer x:Name="Scroller" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                      Background="#FF4A4A4A" Focusable="False">
+            <Border Margin="28" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    BorderBrush="#FF2E2E2E" BorderThickness="1">
+                <local:EditorCanvas x:Name="Board"/>
+            </Border>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

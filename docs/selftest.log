@@ -1,0 +1,46 @@
+      stitched 640x3104 from 17 scroll steps in 2.6s
+PASS  stitched size 640x3104 == 640x3104
+PASS  stitched document matches source pixel-for-pixel (0 differing pixels)
+        view at  300: height 524  Scroll the area now (wheel, scrollbar or keys). Enter / End = done, Esc = cancel.
+        view at  300: height 524  Scroll the area now (wheel, scrollbar or keys). Enter / End = done, Esc = cancel.
+        view at  340: height 564  640 × 564 px captured – keep scrolling, Enter / End when done.
+        view at  420: height 644  640 × 644 px captured – keep scrolling, Enter / End when done.
+        view at  700: height 924  640 × 924 px captured – keep scrolling, Enter / End when done.
+        view at  700 (hover): height 924  640 × 924 px captured – keep scrolling, Enter / End when done.
+        view at 1000: height 1224  640 × 1,224 px captured – keep scrolling, Enter / End when done.
+        view at 1700: height 1224  640 × 1,224 px captured – keep scrolling, Enter / End when done.
+        view at 1720: height 1224  640 × 1,224 px captured – keep scrolling, Enter / End when done.
+        view at 1740: height 1224  Lost track – scrolled too far at once. Scroll back a little.
+        view at 1300: height 1524  640 × 1,524 px captured – keep scrolling, Enter / End when done.
+        view at 1680: height 1904  640 × 1,904 px captured – keep scrolling, Enter / End when done.
+        view at 2000: height 2224  640 × 2,224 px captured – keep scrolling, Enter / End when done.
+        view at 2300: height 2524  640 × 2,524 px captured – keep scrolling, Enter / End when done.
+        view at 2580: height 2804  640 × 2,804 px captured – keep scrolling, Enter / End when done.
+        view at 2580: height 2804  640 × 2,804 px captured – keep scrolling, Enter / End when done.
+        view at 1500: height 2804  640 × 2,804 px captured – keep scrolling, Enter / End when done.
+        view at  200: height 2904  640 × 2,904 px captured – keep scrolling, Enter / End when done.
+      manual: 18 views stitched into 640x2904 in 326 ms
+PASS  manual scroll result height 2904 == 2904 (document rows 200–3000 + fixed header/footer)
+PASS  jumping too far reports 'lost track' and capture recovers after scrolling back
+PASS  manual scroll result matches the document pixel-for-pixel (0 differing pixels)
+      noisy manual: 17 views -> 640x2904 in 414 ms (24.4 ms per frame incl. test rendering)
+PASS  noisy frames (no exact row matches): height 2904 == 2904, lost-track warnings: 0
+PASS  noisy result: every document row in the right place (0 misplaced rows)
+      speed at 2560x1600: 37 ms per frame on average, worst 56 ms (matching only, screen grab not included)
+PASS  full-screen scroll stitched correctly (5000 == 5000)
+PASS  full-screen matching is fast enough for live use (37 ms per frame, target < 60)
+      live screen 2560x1600: BitBlt+copy 297 ms, row hashing 6 ms, CopyFromScreen (old way) 745 ms
+PASS  recent timeline lists the 40 newest captures (40)
+PASS  flattened image keeps native size (900x560)
+PASS  blur pixelates the area into solid blocks
+PASS  crop gives 560x470 (560x470)
+PASS  annotations shift with the crop (arrow tip at 160,402)
+PASS  resize to 50% gives 280x235
+PASS  annotation widths scale with resize (2.5)
+PASS  two undos restore the original (900 px, 9 objects)
+PASS  redo re-applies the crop
+PASS  settings window shows the capture hotkey (Ctrl+S)
+PASS  hotkey box records a key press (F8)
+PASS  hotkey is checked for conflicts ("✓ Available")
+PASS  Backspace clears the hotkey
+PASS  hotkey text parsing
