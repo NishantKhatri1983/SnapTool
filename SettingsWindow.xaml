@@ -224,6 +224,15 @@
                 <Border Style="{StaticResource Card}">
                     <StackPanel>
                         <CheckBox x:Name="StartupBox" Content="Start SnapTool when I sign in to Windows"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,4">
+                            <TextBlock Style="{StaticResource Label}" Text="Click the tray icon" Width="156"/>
+                            <ComboBox x:Name="TrayClickBox"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                            <TextBlock Style="{StaticResource Label}" Text="Double-click the tray icon" Width="156"/>
+                            <ComboBox x:Name="TrayDoubleClickBox"/>
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource Hint}" Text="With a double-click action set, a single click waits a moment (your Windows double-click time) to tell the two apart. Right-click always opens the menu."/>
                         <TextBlock x:Name="SettingsPath" Style="{StaticResource Hint}"/>
                     </StackPanel>
                 </Border>

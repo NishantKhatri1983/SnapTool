@@ -30,7 +30,8 @@ bin\Release\net8.0-windows\SnapTool.exe
 
 `installer\build.ps1` builds the release files (portable exe and installer); the installer step needs [Inno Setup 6](https://jrsoftware.org/isdl.php).
 
-SnapTool sits in the notification area. Left-click the icon to capture, right-click it for the menu.
+SnapTool sits in the notification area. By default, click the icon to capture, double-click it to open the editor on the
+last capture, and right-click it for the menu. What a click and a double-click do is set in Settings → General.
 
 | Command line | Does |
 |---|---|
@@ -97,7 +98,9 @@ Tray menu → **Settings…** (or the gear button in the editor) opens the setti
 - **Saving**: folder (Browse…), file name pattern with a live preview, PNG/JPG, JPG quality.
 - **Editor**: starting tool, what Ctrl+S does, unsaved-changes prompt, remembered tool styles, recent captures timeline.
 - **Capture screen**: magnifier, how much to dim, selection color. **Scrolling capture**: scroll to top first, maximum height, wait after each scroll.
-- **General**: start SnapTool when you sign in to Windows.
+- **General**: start SnapTool when you sign in to Windows; what clicking and double-clicking the tray icon do (capture, scrolling
+  capture, open the editor, or nothing). With a double-click action set, a single click waits for the Windows double-click time
+  (about half a second) to tell the two apart; set double-click to *Nothing* for instant single clicks.
 
 Everything is stored in `%APPDATA%\SnapTool\settings.json`. The palette, tool shortcut keys and per-tool styles are only in that file
 (tray menu → *Edit settings.json (advanced)…*), and hand edits apply as soon as you save the file. All the keys:
@@ -116,6 +119,7 @@ Everything is stored in `%APPDATA%\SnapTool\settings.json`. The palette, tool sh
 | `ScrollMode` | `Manual` | `Manual` (you scroll, Enter/End finishes) or `Auto` |
 | `ScrollToTopFirst`, `ScrollMaxFrames`, `ScrollSettleMs` | true, 80, 180 | Automatic scrolling mode only |
 | `ScrollMaxHeight` | 20000 | Height limit for scrolling captures |
+| `TrayClickAction`, `TrayDoubleClickAction` | `Capture`, `OpenEditor` | Tray icon click / double-click: `Capture`, `ScrollCapture`, `OpenEditor` or `None` |
 | `Palette` | 12 colors | Swatches in the editor |
 | `ToolShortcuts` | V A L R H T C B K | Single keys for the editor tools |
 | `ToolDefaults` | | Color, fill, width, caps, shape, font and blur defaults per tool (updated when you change styles if `RememberLastToolStyle`) |

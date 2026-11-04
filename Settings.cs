@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading;
@@ -71,6 +72,11 @@ public sealed class AppSettings
     public int ScrollMaxHeight { get; set; } = 20000;
     public int ScrollSettleMs { get; set; } = 180;
 
+    // Notification-area icon: Capture | ScrollCapture | OpenEditor | None
+    public string TrayClickAction { get; set; } = "Capture";
+    public string TrayDoubleClickAction { get; set; } = "OpenEditor";
+    public static readonly string[] TrayActions = { "Capture", "ScrollCapture", "OpenEditor", "None" };
+
     public List<string> Palette { get; set; } = new()
     {
         "#FFE53935", "#FFFB8C00", "#FFFDD835", "#FF43A047", "#FF00ACC1", "#FF1E88E5",
@@ -118,6 +124,8 @@ public sealed class AppSettings
         ScrollMaxHeight = Math.Clamp(ScrollMaxHeight, 1000, 60000);
         ScrollSettleMs = Math.Clamp(ScrollSettleMs, 30, 3000);
         RecentStripCount = Math.Clamp(RecentStripCount, 1, 300);
+        TrayClickAction = TrayActions.FirstOrDefault(a => a.Equals(TrayClickAction, StringComparison.OrdinalIgnoreCase)) ?? "Capture";
+        TrayDoubleClickAction = TrayActions.FirstOrDefault(a => a.Equals(TrayDoubleClickAction, StringComparison.OrdinalIgnoreCase)) ?? "OpenEditor";
     }
 }
 

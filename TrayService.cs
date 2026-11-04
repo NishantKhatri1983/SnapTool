@@ -67,8 +67,36 @@ public sealed class TrayService : IDisposable
             ContextMenuStrip = menu,
             Visible = true,
         };
-        _icon.MouseClick += (_, e) => { if (e.Button == WF.MouseButtons.Left) CaptureRequested?.Invoke(); };
+        // Single and double click each run the action chosen in Settings. When a double-click action is set, a single
+        // click waits for the double-click time first, so a double click doesn't also trigger the single-click action.
+        _clickTimer.Tick += (_, _) => { _clickTimer.Stop(); Run(App.Settings.TrayClickAction); };
+        _icon.MouseClick += (_, e) =>
+        {
+            if (e.Button != WF.MouseButtons.Left) return;
+            if (App.Settings.TrayDoubleClickAction == "None") { Run(App.Settings.TrayClickAction); return; }
+            _clickTimer.Interval = WF.SystemInformation.DoubleClickTime;
+            _clickTimer.Stop();
+            _clickTimer.Start();
+        };
+        _icon.MouseDoubleClick += (_, e) =>
+        {
+            if (e.Button != WF.MouseButtons.Left) return;
+            _clickTimer.Stop();
+            Run(App.Settings.TrayDoubleClickAction);
+        };
         _icon.BalloonTipClicked += (_, _) => _balloonAction?.Invoke();
+    }
+
+    readonly WF.Timer _clickTimer = new();
+
+    void Run(string action)
+    {
+        switch (action)
+        {
+            case "Capture": CaptureRequested?.Invoke(); break;
+            case "ScrollCapture": ScrollCaptureRequested?.Invoke(); break;
+            case "OpenEditor": OpenLastRequested?.Invoke(); break;
+        }
     }
 
     void RefreshMenu()
@@ -116,6 +144,7 @@ public sealed class TrayService : IDisposable
 
     public void Dispose()
     {
+        _clickTimer.Dispose();
         _icon.Visible = false;
         _icon.Dispose();
     }

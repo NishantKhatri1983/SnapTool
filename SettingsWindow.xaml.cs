@@ -24,6 +24,10 @@ public partial class SettingsWindow : Window
     };
     static readonly int[] RecentCounts = { 10, 20, 40, 80, 150, 300 };
     static readonly int[] MaxHeights = { 5000, 10000, 20000, 40000, 60000 };
+    static readonly (string Action, string Label)[] TrayActionLabels =
+    {
+        ("Capture", "Capture"), ("ScrollCapture", "Scrolling capture"), ("OpenEditor", "Open the editor (last capture)"), ("None", "Nothing"),
+    };
 
     static readonly Brush Ok = new SolidColorBrush(Color.FromRgb(0x2E, 0x7D, 0x32));
     static readonly Brush Bad = new SolidColorBrush(Color.FromRgb(0xC6, 0x28, 0x28));
@@ -56,6 +60,11 @@ public partial class SettingsWindow : Window
         foreach (var (tool, label) in Tools) DefaultToolBox.Items.Add(new ComboBoxItem { Content = label, Tag = tool });
         foreach (var n in RecentCounts) RecentCountBox.Items.Add(new ComboBoxItem { Content = n.ToString(), Tag = n });
         foreach (var h in MaxHeights) MaxHeightBox.Items.Add(new ComboBoxItem { Content = $"{h:N0} px", Tag = h });
+        foreach (var (action, label) in TrayActionLabels)
+        {
+            TrayClickBox.Items.Add(new ComboBoxItem { Content = label, Tag = action });
+            TrayDoubleClickBox.Items.Add(new ComboBoxItem { Content = label, Tag = action });
+        }
 
         CaptureKey.GestureChanged += ValidateHotkeys;
         ScrollKey.GestureChanged += ValidateHotkeys;
@@ -131,6 +140,8 @@ public partial class SettingsWindow : Window
         SettleSlider.Value = Math.Clamp(s.ScrollSettleMs, 60, 1000);
 
         StartupBox.IsChecked = startup;
+        SelectTag(TrayClickBox, s.TrayClickAction);
+        SelectTag(TrayDoubleClickBox, s.TrayDoubleClickAction);
         _loading = false;
         ValidateHotkeys();
         UpdatePreview();
@@ -180,6 +191,8 @@ public partial class SettingsWindow : Window
         s.ScrollToTopFirst = ScrollTopBox.IsChecked == true;
         s.ScrollMaxHeight = SelectedTag(MaxHeightBox) is int h ? h : 20000;
         s.ScrollSettleMs = (int)SettleSlider.Value;
+        s.TrayClickAction = SelectedTag(TrayClickBox) as string ?? "Capture";
+        s.TrayDoubleClickAction = SelectedTag(TrayDoubleClickBox) as string ?? "OpenEditor";
         s.Normalize();
 
         try
