@@ -11,7 +11,7 @@
 #define AppName "SnapTool"
 #define AppExe "SnapTool.exe"
 #define AppUrl "https://github.com/NishantKhatri1983/SnapTool"
-#define DotNetUrl "https://dotnet.microsoft.com/download/dotnet/8.0"
+#define DotNetUrl "https://dotnet.microsoft.com/download/dotnet/10.0"
 
 [Setup]
 ; Keep this AppId for every future version so upgrades replace the installed copy.
@@ -66,7 +66,8 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: 
 Filename: "{app}\{#AppExe}"; Description: "Start SnapTool now"; Flags: nowait postinstall skipifsilent
 
 [Code]
-// SnapTool needs the .NET 8 Desktop Runtime (x64), or a newer one: it rolls forward to .NET 9, 10, ...
+// SnapTool targets .NET 8 and rolls forward to newer versions, so any .NET Desktop Runtime (x64) from 8 up works.
+// .NET 8 and 9 are out of support since November 2026, so a missing runtime is pointed at .NET 10 (long-term support).
 function HasDesktopRuntime(Root: String): Boolean;
 var
   FindRec: TFindRec;
@@ -93,7 +94,7 @@ var
 begin
   Result := True;
   if HasDesktopRuntime(ExpandConstant('{commonpf64}')) then Exit;
-  if MsgBox('SnapTool needs the Microsoft .NET 8 Desktop Runtime (x64), which isn''t installed on this PC.' + #13#10#13#10 +
+  if MsgBox('SnapTool needs the Microsoft .NET Desktop Runtime 10 (x64), which isn''t installed on this PC.' + #13#10#13#10 +
             'Open the download page now? On that page, choose ".NET Desktop Runtime" > Windows "x64" and install it. ' +
             'SnapTool will be installed either way, and starts once the runtime is there.',
             mbConfirmation, MB_YESNO) = IDYES then

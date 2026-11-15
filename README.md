@@ -13,15 +13,17 @@ Get the latest version from the [Releases page](https://github.com/NishantKhatri
 - **SnapTool-Setup-x.y.z.exe**: normal installer. No admin rights needed; adds a Start menu entry, an uninstaller and (optionally) start with Windows.
 - **SnapTool.exe**: portable, just run it.
 
-> **Requires the Microsoft .NET 8 Desktop Runtime (x64)**, installed separately:
-> [download it from Microsoft](https://dotnet.microsoft.com/download/dotnet/8.0) (choose *.NET Desktop Runtime* → Windows *x64*).
-> A newer .NET Desktop Runtime (9, 10, …) works too. The installer checks for it and offers the link if it's missing.
+> **Requires the Microsoft .NET Desktop Runtime 10 (x64)**, installed separately:
+> [download it from Microsoft](https://dotnet.microsoft.com/download/dotnet/10.0) (choose *.NET Desktop Runtime* → Windows *x64*).
+> SnapTool runs on any .NET Desktop Runtime from 8 up, but .NET 8 and 9 are out of support since November 2026, so install 10
+> (long-term support until November 2028). The installer checks for a runtime and offers the link if it's missing.
 
 The files aren't code-signed, so Windows SmartScreen may say *Windows protected your PC* the first time. Click *More info* → *Run anyway*.
 
 ## Build from source
 
-Needs Windows 10/11 and the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
+Needs Windows 10/11 and the .NET SDK, version 8 or newer ([.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) recommended).
+The app targets .NET 8 and runs on newer runtimes.
 
 ```
 dotnet build -c Release

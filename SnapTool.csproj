@@ -10,7 +10,7 @@
     <LangVersion>latest</LangVersion>
     <RootNamespace>SnapTool</RootNamespace>
     <AssemblyName>SnapTool</AssemblyName>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Product>SnapTool</Product>
     <Description>Lightweight screenshot and scrolling-capture tool</Description>
     <Copyright>Copyright (c) 2026 NishantKhatri1983</Copyright>
